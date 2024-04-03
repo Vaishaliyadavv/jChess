@@ -12,7 +12,7 @@ import java.util.List;
 import static com.chess.engine.board.Move.*;
 
 public class Pawn extends Piece{
-    private final int[] CANDIDATE_MOVE_COORDINATE ={8};
+    private final int[] CANDIDATE_MOVE_COORDINATE ={8, 16, 7, 9};
     Pawn(final int piecePosition,final Alliance pieceAlliance) {
 
         super(piecePosition, pieceAlliance);
@@ -25,7 +25,7 @@ public class Pawn extends Piece{
 
         for (final int currentCandidateOffset : CANDIDATE_MOVE_COORDINATE) {
             final int candidateDestinationCoordinate =
-                    this.piecePosition + (this.getPieceAlliance().getDirection()
+                    this.piecePosition + (this.pieceAlliance.getDirection()
                             * currentCandidateOffset);
 
             if (!BoardUtils.isValidTileCoordinate(candidateDestinationCoordinate)){
@@ -47,6 +47,22 @@ public class Pawn extends Piece{
                     legalMoves.add(new MajorMove(board, this, candidateDestinationCoordinate));
 
                 }
+            } else if(currentCandidateOffset == 7 &&
+                    !(BoardUtils.EIGHT_COLUMN[this.piecePosition] &&
+                            this.pieceAlliance.isWhite() ||
+                    (BoardUtils.FIRST_COLUMN[this.piecePosition] && this.pieceAlliance.isBlack()))){
+
+                if (board.getTile(candidateDestinationCoordinate).isTileOccupied()){
+                    final Piece pieceOnCandidate = board.getTile(candidateDestinationCoordinate).getPiece();
+                    if (this.pieceAlliance != pieceOnCandidate.getPieceAlliance()){
+                        //TODO more work here
+                        legalMoves.add(new MajorMove(board, this, candidateDestinationCoordinate));
+
+                    }
+                }
+
+            } else if (currentCandidateOffset == 9){
+
             }
         }
         
