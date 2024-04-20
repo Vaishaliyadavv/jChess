@@ -9,25 +9,25 @@ import java.util.Map;
 public abstract class Tile {
 
 
-   protected final int tileCoordinate;
+    private static final Map<Integer, EmptyTile> EMPTY_TILES_CACHE = createAllPossibleTiles();
+    protected final int tileCoordinate;
 
-   private static final Map<Integer, EmptyTile> EMPTY_TILES_CACHE = createAllPossibleTiles();
+    private Tile(final int tileCoordinate) {
+        this.tileCoordinate = tileCoordinate;
+    }
 
     private static Map<Integer, EmptyTile> createAllPossibleTiles() {
         final Map<Integer, EmptyTile> emptyTileMap = new HashMap<>();
 
-        for (int i = 0; i < BoardUtils.NUM_TILES;i++) {
+        for (int i = 0; i < BoardUtils.NUM_TILES; i++) {
             emptyTileMap.put(i, new EmptyTile(i));
         }
 
         return ImmutableMap.copyOf(emptyTileMap);
     }
-    public static Tile createTile(final int tileCoordinate, final Piece piece){
-        return piece != null ? new OccupiedTile(tileCoordinate, piece) : EMPTY_TILES_CACHE.get(tileCoordinate);
-    }
 
-    private Tile(final int tileCoordinate) {
-        this.tileCoordinate = tileCoordinate;
+    public static Tile createTile(final int tileCoordinate, final Piece piece) {
+        return piece != null ? new OccupiedTile(tileCoordinate, piece) : EMPTY_TILES_CACHE.get(tileCoordinate);
     }
 
     public abstract boolean isTileOccupied();
@@ -40,7 +40,7 @@ public abstract class Tile {
         }
 
         @Override
-        public String toString(){
+        public String toString() {
             return "-";
         }
 
@@ -58,15 +58,14 @@ public abstract class Tile {
     public static final class OccupiedTile extends Tile {
         private final Piece pieceOnTile;
 
-        private OccupiedTile(int tileCoordinate,final Piece pieceOnTile) {
+        private OccupiedTile(int tileCoordinate, final Piece pieceOnTile) {
             super(tileCoordinate);
             this.pieceOnTile = pieceOnTile;
         }
+
         @Override
-        public String toString(){
-            return getPiece().getPieceAlliance().isBlack() ?
-                    getPiece().toString().toLowerCase():
-                    getPiece().toString();
+        public String toString() {
+            return getPiece().getPieceAlliance().isBlack() ? getPiece().toString().toLowerCase() : getPiece().toString();
         }
 
         @Override
