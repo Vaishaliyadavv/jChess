@@ -15,7 +15,7 @@ import static com.chess.engine.board.Move.MajorMove;
 public class Pawn extends Piece {
     private final int[] CANDIDATE_MOVE_COORDINATE = {8, 16, 7, 9};
 
-    public Pawn( final Alliance pieceAlliance, final int piecePosition) {
+    public Pawn(final Alliance pieceAlliance, final int piecePosition) {
 
         super(piecePosition, pieceAlliance);
     }
@@ -41,11 +41,7 @@ public class Pawn extends Piece {
                     legalMoves.add(new MajorMove(board, this, candidateDestinationCoordinate));
 
                 }
-            } else if (currentCandidateOffset == 7 &&
-                    !(BoardUtils.EIGHT_COLUMN[this.piecePosition] &&
-                            this.pieceAlliance.isWhite() ||
-                            (BoardUtils.FIRST_COLUMN[this.piecePosition] &&
-                                    this.pieceAlliance.isBlack()))) {
+            } else if (currentCandidateOffset == 7 && !(BoardUtils.EIGHT_COLUMN[this.piecePosition] && this.pieceAlliance.isWhite() || (BoardUtils.FIRST_COLUMN[this.piecePosition] && this.pieceAlliance.isBlack()))) {
 
                 if (board.getTile(candidateDestinationCoordinate).isTileOccupied()) {
                     final Piece pieceOnCandidate = board.getTile(candidateDestinationCoordinate).getPiece();
@@ -56,11 +52,7 @@ public class Pawn extends Piece {
                     }
                 }
 
-            } else if (currentCandidateOffset == 9 &&
-                    !(BoardUtils.FIRST_COLUMN[this.piecePosition] &&
-                            this.pieceAlliance.isWhite() ||
-                            (BoardUtils.EIGHT_COLUMN[this.piecePosition] &&
-                                    this.pieceAlliance.isBlack()))) {
+            } else if (currentCandidateOffset == 9 && !(BoardUtils.FIRST_COLUMN[this.piecePosition] && this.pieceAlliance.isWhite() || (BoardUtils.EIGHT_COLUMN[this.piecePosition] && this.pieceAlliance.isBlack()))) {
                 if (board.getTile(candidateDestinationCoordinate).isTileOccupied()) {
                     final Piece pieceOnCandidate = board.getTile(candidateDestinationCoordinate).getPiece();
                     if (this.pieceAlliance != pieceOnCandidate.getPieceAlliance()) {
@@ -76,4 +68,9 @@ public class Pawn extends Piece {
 
         return ImmutableList.copyOf(legalMoves);
     }
+
+    public String toString() {
+        return PieceType.PAWN.toString();
+    }
+
 }

@@ -11,9 +11,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class Rook extends Piece{
+public class Rook extends Piece {
     private final static int[] CANDIDATE_MOVE_VECTOR_COORDINATES = {-8, -1, 1, 8};
-    public Rook( Alliance pieceAlliance ,int piecePosition) {
+
+    public Rook(Alliance pieceAlliance, int piecePosition) {
         super(piecePosition, pieceAlliance);
     }
 
@@ -55,4 +56,9 @@ public class Rook extends Piece{
 
         return ImmutableList.copyOf(legalMoves);
     }
+
+    public String toString() {
+        return PieceType.ROOK.toString();
+    }
+
 }
