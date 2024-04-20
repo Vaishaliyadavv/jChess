@@ -29,21 +29,13 @@ public class Board {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         for (int i = 0; i < BoardUtils.NUM_TILES; i++) {
-            final String tileText = prettyPrint(this.gameBoard.get(i));
+            final String tileText = this.gameBoard.get(i).toString();
             builder.append(String.format("%3s", tileText));
             if((i + 1) % BoardUtils.NUM_TILES == 0) {
                 builder.append("\n");
             }
         }
         return builder.toString();
-    }
-
-    private static String prettyPrint(final Tile tile) {
-        if(tile.isTileOccupied()){
-            return tile.getPiece().getPieceAlliance().isBlack() ? tile.toString().toLowerCase():
-                    tile.toString();
-        }
-        return tile.toString();
     }
 
     private static Collection<Piece> calculateActivePieces(final List<Tile> gameBoard, final Alliance alliance) {
