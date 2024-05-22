@@ -10,10 +10,11 @@ public class BlackPlayer extends Player {
     public BlackPlayer(Board board,
                        Collection<Move> whiteStandardLegalMoves,
                        Collection<Move> blackStandardLegalMoves) {
+        super(board, whiteStandardLegalMoves, blackStandardLegalMoves);
     }
 
     @Override
     public Collection<Piece> getActivePieces() {
-        return this.board.getBlackPices();
+        return this.board.getWhitePieces();
     }
 }
