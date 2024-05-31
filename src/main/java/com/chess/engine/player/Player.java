@@ -53,7 +53,6 @@ public abstract class Player {
         return this.isInCheck;
     }
 
-    //TODO implement these methods below
     public boolean isInCheckMate() {
         return this.isInCheck && !hasEscapeMoves();
     }
@@ -69,8 +68,9 @@ public abstract class Player {
     }
 
     public boolean isInStaleMte() {
-        return false;
+        return !this.isInCheck && !hasEscapeMoves();
     }
+    //TODO implement these methods below
 
     public boolean isCastled() {
         return false;
