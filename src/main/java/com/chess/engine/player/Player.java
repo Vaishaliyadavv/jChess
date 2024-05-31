@@ -10,7 +10,6 @@ import com.google.common.collect.ImmutableList;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 public abstract class Player {
 
@@ -29,7 +28,7 @@ public abstract class Player {
     private static Collection<Move> calculateAttackOnTile(int piecePosition, Collection<Move> moves) {
         final List<Move> attackMoves = new ArrayList<>();
         for (final Move move : moves) {
-            if (piecePosition == move.getDestinationCoordinate()){
+            if (piecePosition == move.getDestinationCoordinate()) {
                 attackMoves.add(move);
             }
         }
@@ -49,13 +48,23 @@ public abstract class Player {
         return legalMoves.contains(move);
     }
 
-    //TODO implement these methods below
 
     public boolean isInCheck() {
         return this.isInCheck;
     }
 
+    //TODO implement these methods below
     public boolean isInCheckMate() {
+        return this.isInCheck && !hasEscapeMoves();
+    }
+
+    protected boolean hasEscapeMoves() {
+        for (final Move move : this.legalMoves) {
+            final MoveTransition transition = makeMove(move);
+            if (transition.getMoveStatus().isDone()) {
+                return true;
+            }
+        }
         return false;
     }
 
