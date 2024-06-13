@@ -20,6 +20,9 @@ public abstract class Move {
     public int getDestinationCoordinate() {
         return this.destinationCoordinate;
     }
+    public Piece getMovedPiece(){
+        return this.movedPiece;
+    }
 
     public abstract Board execute();
 
@@ -43,7 +46,7 @@ public abstract class Move {
                 builder.setPiece(piece);
             }
             //move the moved piece onto the new board
-            builder.setPiece(null);
+            builder.setPiece(this.movedPiece.movePiece(this));
             builder.setMoveMaker(this.board.currentPlayer().getOpponent().getAlliance());
             return builder.build();
         }

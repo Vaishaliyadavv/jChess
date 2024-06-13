@@ -57,6 +57,10 @@ public class Queen extends Piece {
 
         return ImmutableList.copyOf(legalMoves);
     }
+    public Queen movePiece(final Move move) {
+        return new Queen(move.getMovedPiece().getPieceAlliance() ,
+                move.getDestinationCoordinate());
+    }
 
     public String toString() {
         return PieceType.QUEEN.toString();
