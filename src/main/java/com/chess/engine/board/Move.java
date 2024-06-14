@@ -20,7 +20,8 @@ public abstract class Move {
     public int getDestinationCoordinate() {
         return this.destinationCoordinate;
     }
-    public Piece getMovedPiece(){
+
+    public Piece getMovedPiece() {
         return this.movedPiece;
     }
 
